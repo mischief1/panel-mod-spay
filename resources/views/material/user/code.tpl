@@ -25,7 +25,7 @@
 			<section class="content-inner margin-top-no">
 				<div class="row">
 				
-				{if $enable_alipay != 'false'}
+					{if $enable_alipay != 'false'}
 					<div class="col-lg-12 col-md-12">
 						<div class="card margin-bottom-no">
 							<div class="card-main">
@@ -105,35 +105,37 @@
 														
 													</tr>
 													{foreach $codes as $code}
-														<tr>
-															<td>#{$code->id}</td>
-															<td>{$code->code}</td>
-															{if $code->type==-1}
-															<td>金额充值</td>
-															{/if}
-															{if $code->type==10001}
-															<td>流量充值</td>
-															{/if}
-															{if $code->type==10002}
-															<td>用户续期</td>
-															{/if}
-															{if $code->type>=1&&$code->type<=10000}
-															<td>等级续期 - 等级{$code->type}</td>
-															{/if}
-															{if $code->type==-1}
-															<td>充值 {$code->number} 元</td>
-															{/if}
-															{if $code->type==10001}
-															<td>充值 {$code->number} GB 流量</td>
-															{/if}
-															{if $code->type==10002}
-															<td>延长账户有效期 {$code->number} 天</td>
-															{/if}
-															{if $code->type>=1&&$code->type<=10000}
-															<td>延长等级有效期 {$code->number} 天</td>
-															{/if}
-															<td>{$code->usedatetime}</td>
-														</tr>
+														{if $code->type!=-2}
+															<tr>
+																<td>#{$code->id}</td>
+																<td>{$code->code}</td>
+																{if $code->type==-1}
+																<td>金额充值</td>
+																{/if}
+																{if $code->type==10001}
+																<td>流量充值</td>
+																{/if}
+																{if $code->type==10002}
+																<td>用户续期</td>
+																{/if}
+																{if $code->type>=1&&$code->type<=10000}
+																<td>等级续期 - 等级{$code->type}</td>
+																{/if}
+																{if $code->type==-1}
+																<td>充值 {$code->number} 元</td>
+																{/if}
+																{if $code->type==10001}
+																<td>充值 {$code->number} GB 流量</td>
+																{/if}
+																{if $code->type==10002}
+																<td>延长账户有效期 {$code->number} 天</td>
+																{/if}
+																{if $code->type>=1&&$code->type<=10000}
+																<td>延长等级有效期 {$code->number} 天</td>
+																{/if}
+																<td>{$code->usedatetime}</td>
+															</tr>
+														{/if}
 													{/foreach}
 												</table>
 												{$codes->render()}
@@ -201,8 +203,11 @@
 				alipay();
 			}
 		})
+		
+		
+		
 		{/if}
-    })
+    
 	
 	timestamp = {time()}; 
 		
@@ -227,5 +232,6 @@
 		tid = setTimeout(f, 1000); //循环调用触发setTimeout
 	}
 	setTimeout(f, 1000);
+})
 </script>
 
